@@ -3,7 +3,6 @@ node_modules/
 npm-debug.log
 
 # Private Config Files
-app/js/config.js
 create_account.mjs
 
 # OS generated files
