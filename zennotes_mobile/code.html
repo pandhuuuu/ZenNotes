@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ZenNotes | Digital Silence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Custom Zen Cursor Animation */
+        .zen-cursor {
+            width: 2px;
+            height: 1.5rem;
+            background-color: #909097; /* outline color */
+            display: inline-block;
+            animation: pulse-cursor 2s infinite ease-in-out;
+            vertical-align: middle;
+            margin-left: 2px;
+        }
+
+        @keyframes pulse-cursor {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        /* Smooth Transition for Sidebar */
+        .sidebar-transition {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Hide scrollbar for clean look */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        @keyframes pulse-sync {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .sync-pulse {
+            animation: pulse-sync 2s infinite ease-in-out;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#39485a",
+                        "primary-fixed-dim": "#c0c6de",
+                        "surface-container-lowest": "#0a0f12",
+                        "secondary-fixed": "#d4e4fa",
+                        "surface-tint": "#c0c6de",
+                        "on-secondary-container": "#a7b6cc",
+                        "primary-container": "#020617",
+                        "surface-container-highest": "#313539",
+                        "surface": "#0f1417",
+                        "on-primary-container": "#72778d",
+                        "inverse-primary": "#585e73",
+                        "on-background": "#dfe3e7",
+                        "outline-variant": "#46464c",
+                        "on-surface-variant": "#c6c6cd",
+                        "error-container": "#93000a",
+                        "on-secondary-fixed": "#0d1c2d",
+                        "surface-dim": "#0f1417",
+                        "outline": "#909097",
+                        "on-tertiary-fixed": "#00210c",
+                        "secondary-fixed-dim": "#b9c8de",
+                        "on-primary": "#2a3043",
+                        "on-primary-fixed-variant": "#40465a",
+                        "on-surface": "#dfe3e7",
+                        "secondary": "#b9c8de",
+                        "primary": "#c0c6de",
+                        "inverse-surface": "#dfe3e7",
+                        "surface-container": "#1b2023",
+                        "surface-container-high": "#262b2e",
+                        "on-secondary": "#233143",
+                        "error": "#ffb4ab",
+                        "surface-container-low": "#171c1f",
+                        "tertiary-fixed": "#6dfe9c",
+                        "background": "#0f1417",
+                        "on-secondary-fixed-variant": "#39485a",
+                        "inverse-on-surface": "#2c3134",
+                        "on-tertiary-fixed-variant": "#005227",
+                        "on-error": "#690005",
+                        "on-tertiary": "#003919",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed": "#dce1fb",
+                        "on-primary-fixed": "#151b2d",
+                        "surface-variant": "#313539",
+                        "on-tertiary-container": "#008a46",
+                        "surface-bright": "#353a3d",
+                        "tertiary": "#4de082",
+                        "tertiary-container": "#000902",
+                        "tertiary-fixed-dim": "#4de082"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "32px",
+                        "margin-desktop": "64px",
+                        "unit": "8px",
+                        "container-max": "800px",
+                        "margin-mobile": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["JetBrains Mono"],
+                        "label-sm": ["Geist"],
+                        "headline-lg": ["Geist"],
+                        "headline-lg-mobile": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "body-md": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "1.8", "letterSpacing": "0", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-primary min-h-screen flex overflow-hidden">
+<!-- Mobile History Sidebar Overlay -->
+<div class="fixed inset-0 bg-surface/80 backdrop-blur-xl z-40 opacity-0 pointer-events-none transition-opacity duration-500" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+<!-- SideNavBar Component (JSON Guided) -->
+<aside class="h-screen w-3/4 md:w-1/4 fixed left-0 top-0 z-50 -translate-x-full sidebar-transition bg-surface border-none flex flex-col justify-between py-margin-desktop px-8 h-full" id="sidebar">
+<div class="flex flex-col gap-12">
+<div class="flex flex-col gap-2">
+<h1 class="font-headline-md text-headline-md text-on-surface tracking-tighter">ZenNotes</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant/50">Digital Silence</p>
+</div>
+<button class="text-left py-2 font-label-sm text-label-sm text-primary hover:opacity-70 transition-opacity">
+                + Write Today
+            </button>
+<nav class="flex flex-col gap-6">
+<!-- Active Tab -->
+<div class="group cursor-pointer flex items-center gap-4 text-on-surface font-bold scale-98 transition-transform duration-200">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span class="font-body-md text-body-md">19 Jul 2026</span>
+</div>
+<!-- Inactive Tabs -->
+<div class="group cursor-pointer flex items-center gap-4 text-on-surface-variant/50 font-normal hover:text-on-surface transition-opacity duration-300">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span class="font-body-md text-body-md">18 Jul 2026</span>
+</div>
+<div class="group cursor-pointer flex items-center gap-4 text-on-surface-variant/50 font-normal hover:text-on-surface transition-opacity duration-300">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span class="font-body-md text-body-md">17 Jul 2026</span>
+</div>
+<div class="group cursor-pointer flex items-center gap-4 text-on-surface-variant/50 font-normal hover:text-on-surface transition-opacity duration-300">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span class="font-body-md text-body-md">16 Jul 2026</span>
+</div>
+<div class="group cursor-pointer flex items-center gap-4 text-on-surface-variant/50 font-normal hover:text-on-surface transition-opacity duration-300">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span class="font-body-md text-body-md">15 Jul 2026</span>
+</div>
+</nav>
+</div>
+<div class="flex flex-col gap-6 mt-auto">
+<div class="flex items-center gap-4 text-on-surface-variant/50 font-normal hover:text-on-surface transition-opacity duration-300 cursor-pointer">
+<span class="material-symbols-outlined text-sm">search</span>
+<span class="font-label-sm text-label-sm">Search notes...</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant/50 font-normal hover:text-on-surface transition-opacity duration-300 cursor-pointer">
+<span class="material-symbols-outlined text-sm">cloud_download</span>
+<span class="font-label-sm text-label-sm">Download Backup</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col relative w-full h-screen">
+<!-- TopAppBar Component (JSON Guided) -->
+<header class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-8 bg-transparent fixed top-0 z-30">
+<div class="flex items-center gap-4">
+<button class="hover:opacity-70 transition-opacity" onclick="toggleSidebar()">
+<span class="material-symbols-outlined text-on-surface">menu</span>
+</button>
+<h2 class="font-label-sm text-label-sm tracking-widest text-on-surface uppercase">Sunday, July 19, 2026</h2>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-1.5 bg-tertiary rounded-full sync-pulse"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Saved to Cloud</span>
+<button class="ml-4 hover:opacity-70 transition-opacity flex items-center">
+<span class="material-symbols-outlined text-on-surface text-sm" data-icon="sync">sync</span>
+</button>
+</div>
+</header>
+<!-- Focused Writing Area -->
+<section class="flex-1 w-full flex flex-col items-center justify-start pt-32 pb-margin-mobile overflow-y-auto no-scrollbar">
+<div class="w-full max-w-container-max px-margin-mobile md:px-0">
+<!-- Atmosphere: Subtle Background Texture Shader (Placeholder) -->
+<div class="fixed inset-0 -z-10 opacity-20 pointer-events-none">
+
+</div>
+<div class="relative w-full">
+<textarea autofocus="" class="w-full min-h-[618px] bg-transparent border-none focus:ring-0 resize-none font-body-lg text-body-lg text-on-surface placeholder:text-on-surface-variant/30 leading-relaxed outline-none p-0" id="zen-editor" placeholder="Write down whatever is on your mind or heart today..."></textarea>
+</div>
+<!-- Footer Stats / Subtle Interaction -->
+<div class="mt-12 opacity-30 hover:opacity-100 transition-opacity duration-700 flex justify-between items-center w-full">
+<div class="flex gap-6 font-label-sm text-label-sm">
+<span id="word-count">0 words</span>
+<span id="char-count">0 characters</span>
+</div>
+<div class="font-label-sm text-label-sm tracking-tighter italic">
+                        The silence is your canvas.
+                    </div>
+</div>
+</div>
+</section>
+<!-- Bottom Ambient Shadow -->
+<div class="fixed bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none z-20"></div>
+</main>
+<script>
+        // Sidebar Toggle Logic
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            const isOpen = sidebar.classList.contains('-translate-x-full');
+            
+            if(isOpen) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('opacity-0', 'pointer-events-none');
+                overlay.classList.add('opacity-100');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('opacity-0', 'pointer-events-none');
+                overlay.classList.remove('opacity-100');
+            }
+        }
+
+        // Real-time stats logic
+        const editor = document.getElementById('zen-editor');
+        const wordCount = document.getElementById('word-count');
+        const charCount = document.getElementById('char-count');
+
+        editor.addEventListener('input', (e) => {
+            const text = e.target.value.trim();
+            const words = text ? text.split(/\s+/).length : 0;
+            const chars = text.length;
+
+            wordCount.innerText = `${words} ${words === 1 ? 'word' : 'words'}`;
+            charCount.innerText = `${chars} ${chars === 1 ? 'character' : 'characters'}`;
+        });
+
+        // Micro-interaction: Focus effect
+        editor.addEventListener('focus', () => {
+            document.querySelector('header').style.opacity = '0.4';
+            document.querySelector('header').style.transition = 'opacity 2s ease';
+        });
+
+        editor.addEventListener('blur', () => {
+            document.querySelector('header').style.opacity = '1';
+        });
+
+        // Tab to indent support
+        editor.addEventListener('keydown', function(e) {
+            if (e.key == 'Tab') {
+                e.preventDefault();
+                var start = this.selectionStart;
+                var end = this.selectionEnd;
+                this.value = this.value.substring(0, start) + "\t" + this.value.substring(end);
+                this.selectionStart = this.selectionEnd = start + 1;
+            }
+        });
+    </script>
+</body></html>

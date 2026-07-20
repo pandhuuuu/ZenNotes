@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ZenNotes | Digital Silence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#39485a",
+                    "primary-fixed-dim": "#c0c6de",
+                    "surface-container-lowest": "#0a0f12",
+                    "secondary-fixed": "#d4e4fa",
+                    "surface-tint": "#c0c6de",
+                    "on-secondary-container": "#a7b6cc",
+                    "primary-container": "#020617",
+                    "surface-container-highest": "#313539",
+                    "surface": "#0f1417",
+                    "on-primary-container": "#72778d",
+                    "inverse-primary": "#585e73",
+                    "on-background": "#dfe3e7",
+                    "outline-variant": "#46464c",
+                    "on-surface-variant": "#c6c6cd",
+                    "error-container": "#93000a",
+                    "on-secondary-fixed": "#0d1c2d",
+                    "surface-dim": "#0f1417",
+                    "outline": "#909097",
+                    "on-tertiary-fixed": "#00210c",
+                    "secondary-fixed-dim": "#b9c8de",
+                    "on-primary": "#2a3043",
+                    "on-primary-fixed-variant": "#40465a",
+                    "on-surface": "#dfe3e7",
+                    "secondary": "#b9c8de",
+                    "primary": "#c0c6de",
+                    "inverse-surface": "#dfe3e7",
+                    "surface-container": "#1b2023",
+                    "surface-container-high": "#262b2e",
+                    "on-secondary": "#233143",
+                    "error": "#ffb4ab",
+                    "surface-container-low": "#171c1f",
+                    "tertiary-fixed": "#6dfe9c",
+                    "background": "#0f1417",
+                    "on-secondary-fixed-variant": "#39485a",
+                    "inverse-on-surface": "#2c3134",
+                    "on-tertiary-fixed-variant": "#005227",
+                    "on-error": "#690005",
+                    "on-tertiary": "#003919",
+                    "on-error-container": "#ffdad6",
+                    "primary-fixed": "#dce1fb",
+                    "on-primary-fixed": "#151b2d",
+                    "surface-variant": "#313539",
+                    "on-tertiary-container": "#008a46",
+                    "surface-bright": "#353a3d",
+                    "tertiary": "#4de082",
+                    "tertiary-container": "#000902",
+                    "tertiary-fixed-dim": "#4de082"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "32px",
+                    "margin-desktop": "64px",
+                    "unit": "8px",
+                    "container-max": "800px",
+                    "margin-mobile": "24px"
+            },
+            "fontFamily": {
+                    "body-lg": ["JetBrains Mono"],
+                    "label-sm": ["Geist"],
+                    "headline-lg": ["Geist"],
+                    "headline-lg-mobile": ["Geist"],
+                    "headline-md": ["Geist"],
+                    "body-md": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.8", "letterSpacing": "0", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #020617; /* Explicit Slate-950 per requirements */
+            color: #dfe3e7;
+            overflow: hidden;
+        }
+
+        .zen-cursor {
+            width: 2px;
+            height: 1.5em;
+            background-color: #94a3b8; /* Slate-400 */
+            display: inline-block;
+            vertical-align: middle;
+            animation: pulse-cursor 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-cursor {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .blur-snippet {
+            filter: blur(4px);
+            user-select: none;
+            opacity: 0.3;
+        }
+
+        .sidebar-item-active {
+            color: #dfe3e7;
+            font-weight: 700;
+        }
+
+        .sidebar-item-inactive {
+            color: rgba(198, 198, 205, 0.5);
+            font-weight: 400;
+        }
+
+        @keyframes pulse-sync {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.5); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+
+        .sync-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #4de082;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse-sync 2s infinite;
+        }
+
+        textarea:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        /* Custom Scrollbar for Minimalist Look */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md selection:bg-primary/20 selection:text-on-surface">
+<div class="flex h-screen w-full">
+<!-- Sidebar (SideNavBar Implementation) -->
+<aside class="w-1/4 h-screen bg-[#020617] flex flex-col justify-between py-16 px-12 border-none">
+<div class="flex flex-col space-y-12">
+<!-- Brand Anchor -->
+<div class="flex flex-col space-y-2">
+<h1 class="font-headline-md text-headline-md text-on-surface tracking-tighter">🗒️ ZenNotes</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant/40 tracking-widest uppercase">Digital Silence</p>
+</div>
+<!-- CTA -->
+<button class="w-fit font-label-sm text-label-sm text-on-surface hover:opacity-70 transition-opacity duration-300 text-left">
+                    + Write Today
+                </button>
+<!-- History List -->
+<nav class="flex flex-col space-y-8">
+<!-- Active Item (19 Jul) -->
+<div class="flex flex-col space-y-1 group cursor-pointer sidebar-item-active active:scale-98 transition-transform duration-200">
+<span class="font-label-sm text-label-sm">19 Jul 2026</span>
+<div class="text-on-surface-variant/30 text-[13px] leading-relaxed line-clamp-2">
+                            The silence this morning is heavy. I can hear the clock ticking across the room, but my mind is finally...
+                        </div>
+</div>
+<!-- Inactive Items -->
+<div class="flex flex-col space-y-1 group cursor-pointer sidebar-item-inactive hover:text-on-surface transition-opacity duration-300 active:scale-98 transition-transform duration-200">
+<span class="font-label-sm text-label-sm">18 Jul 2026</span>
+<div class="blur-snippet text-[13px] leading-relaxed line-clamp-1">
+                            Confidential thought process regarding the future of the interface and the soul of the machine.
+                        </div>
+</div>
+<div class="flex flex-col space-y-1 group cursor-pointer sidebar-item-inactive hover:text-on-surface transition-opacity duration-300 active:scale-98 transition-transform duration-200">
+<span class="font-label-sm text-label-sm">17 Jul 2026</span>
+<div class="blur-snippet text-[13px] leading-relaxed line-clamp-1">
+                            Minimalism is not about the lack of something. It is the perfect amount of something.
+                        </div>
+</div>
+<div class="flex flex-col space-y-1 group cursor-pointer sidebar-item-inactive hover:text-on-surface transition-opacity duration-300 active:scale-98 transition-transform duration-200">
+<span class="font-label-sm text-label-sm">16 Jul 2026</span>
+<div class="blur-snippet text-[13px] leading-relaxed line-clamp-1">
+                            The grey clouds have settled over the city. A perfect day for technical zen reflections.
+                        </div>
+</div>
+</nav>
+</div>
+<!-- Footer Tabs -->
+<div class="flex flex-col space-y-4">
+<div class="flex items-center space-x-3 text-on-surface-variant/50 hover:text-on-surface transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-[18px]">search</span>
+<span class="font-label-sm text-label-sm">Search notes...</span>
+</div>
+<div class="flex items-center space-x-3 text-on-surface-variant/50 hover:text-on-surface transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-[18px]">cloud_download</span>
+<span class="font-label-sm text-label-sm">Download Backup</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 h-screen bg-[#020617] overflow-y-auto relative flex flex-col items-center">
+<!-- TopAppBar Contextual Shell -->
+<header class="w-full flex justify-between items-center px-16 py-12 sticky top-0 bg-[#020617]/80 backdrop-blur-sm z-10">
+<div class="flex flex-col">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Sunday, July 19, 2026</h2>
+</div>
+<div class="flex items-center space-x-4">
+<span class="font-label-sm text-label-sm text-on-surface-variant/60">Saved to Cloud</span>
+<div class="sync-dot"></div>
+<span class="material-symbols-outlined text-on-surface-variant/40 hover:opacity-70 transition-opacity cursor-pointer ml-4">sync</span>
+</div>
+</header>
+<!-- Editor Section -->
+<div class="w-full max-w-[800px] px-16 pb-32 flex flex-col flex-1">
+<div class="relative w-full h-full">
+<textarea autofocus="" class="w-full h-full bg-transparent border-none p-0 font-body-lg text-body-lg text-on-surface placeholder:text-on-surface-variant/20 resize-none leading-relaxed" id="zen-editor" placeholder="Write down whatever is on your mind or heart today..."></textarea>
+</div>
+</div>
+<!-- Atmospheric Pulse Component -->
+<div class="fixed bottom-12 right-12 flex items-center space-x-2 opacity-20 pointer-events-none">
+<div class="zen-cursor"></div>
+</div>
+</main>
+</div>
+<!-- Micro-interaction for Focus -->
+<script>
+        const editor = document.getElementById('zen-editor');
+        
+        // Soft focus animation logic
+        editor.addEventListener('focus', () => {
+            editor.style.transition = 'color 1s ease';
+            editor.style.color = '#dfe3e7';
+        });
+
+        // Auto-resize logic if content overflows (maintaining zen feel)
+        editor.addEventListener('input', () => {
+            // Keep editor focused and minimal
+        });
+
+        // Atmospheric Micro-interaction: Smooth opacity shift on scroll
+        const mainArea = document.querySelector('main');
+        mainArea.addEventListener('scroll', () => {
+            const opacity = Math.max(0.2, 1 - mainArea.scrollTop / 300);
+            document.querySelector('header').style.opacity = opacity;
+        });
+    </script>
+</body></html>
